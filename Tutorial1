@@ -1,1 +1,8 @@
+# 只对当前仓库生效（在仓库目录下执行）
+git config user.name "Your Name"
+git config user.email "you@example.com"
+
+# 对你电脑上的所有仓库生效（推荐）
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
 
