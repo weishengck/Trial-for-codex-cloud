@@ -1,0 +1,121 @@
+:root {
+  color-scheme: light;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: #f5f6fb;
+  color: #1f2430;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.timer-app {
+  width: min(420px, 100%);
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(31, 36, 48, 0.12);
+  display: grid;
+  gap: 24px;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+header p {
+  margin: 0;
+  color: #566074;
+  line-height: 1.5;
+}
+
+.display {
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 12px 0;
+  background: linear-gradient(135deg, #f0f4ff, #eef7ff);
+  border-radius: 16px;
+}
+
+.separator {
+  margin: 0 8px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.input-field {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  color: #6a7385;
+}
+
+.input-field input {
+  padding: 10px 12px;
+  border: 1px solid #d7ddea;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-field input:focus {
+  border-color: #4f7df9;
+  box-shadow: 0 0 0 3px rgba(79, 125, 249, 0.18);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.primary {
+  background: #4f7df9;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(79, 125, 249, 0.35);
+}
+
+.ghost {
+  background: #eef1f7;
+  color: #334155;
+}
+
+button:not(.primary):not(.ghost) {
+  background: #ffcd6c;
+  color: #5a3d00;
+}
+
+.status {
+  text-align: center;
+  color: #657086;
+  font-size: 14px;
+}
