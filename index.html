@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你画我猜</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">派对小游戏</p>
+        <h1>你画我猜</h1>
+        <p class="lede">挑一张词卡，画出线索，让队友来猜。</p>
+      </div>
+      <div class="actions">
+        <button id="newWord" class="primary">换一词</button>
+        <button id="toggleWord" class="ghost">隐藏词语</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="drawing-column">
+        <div class="word-card">
+          <div>
+            <p class="label">本轮词语</p>
+            <p id="wordDisplay" class="word">——</p>
+          </div>
+          <div class="card-actions">
+            <button id="revealWord" class="ghost small">显示答案</button>
+          </div>
+        </div>
+
+        <div class="tools">
+          <div class="palette" id="palette"></div>
+          <label class="slider">
+            <span>笔刷粗细</span>
+            <input type="range" id="sizeControl" min="2" max="30" value="8">
+            <span id="sizeValue">8px</span>
+          </label>
+          <button id="eraser" class="ghost">橡皮</button>
+          <button id="clear" class="danger">清空画布</button>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="board" aria-label="绘画区域"></canvas>
+        </div>
+      </section>
+
+      <section class="guess-column">
+        <div class="card">
+          <h2>提交猜测</h2>
+          <label class="field">
+            <span>玩家名（可选）</span>
+            <input type="text" id="playerName" placeholder="例如：小李">
+          </label>
+          <label class="field">
+            <span>你的答案</span>
+            <input type="text" id="guessInput" placeholder="输入你猜的词语" autocomplete="off">
+          </label>
+          <button id="submitGuess" class="primary full">提交</button>
+          <p id="status" class="status"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>猜测记录</h3>
+            <button id="clearHistory" class="ghost small">清空记录</button>
+          </div>
+          <ul id="history" class="history"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>交互计时器</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="timer-app">
+      <header>
+        <h1>交互计时器</h1>
+        <p>设置时间后点击开始，可暂停或重置。</p>
+      </header>
+
+      <section class="display" aria-live="polite">
+        <span id="minutes">00</span>
+        <span class="separator">:</span>
+        <span id="seconds">00</span>
+      </section>
+
+      <section class="controls">
+        <label class="input-field">
+          分钟
+          <input id="input-minutes" type="number" min="0" max="99" value="5" />
+        </label>
+        <label class="input-field">
+          秒
+          <input id="input-seconds" type="number" min="0" max="59" value="0" />
+        </label>
+      </section>
+
+      <section class="buttons">
+        <button id="start" class="primary">开始</button>
+        <button id="pause">暂停</button>
+        <button id="reset" class="ghost">重置</button>
+      </section>
+
+      <section class="status">
+        <span id="status-text">准备就绪</span>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
