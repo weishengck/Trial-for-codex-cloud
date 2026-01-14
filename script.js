@@ -46,12 +46,19 @@ const state = {
   erasing: false
 };
 
+const TIMER_DURATION = 60;
+let timerRemaining = TIMER_DURATION;
+let timerId = null;
+
 const board = document.getElementById("board");
 const ctx = board.getContext("2d");
 const statusEl = document.getElementById("status");
 const historyEl = document.getElementById("history");
 const sizeControl = document.getElementById("sizeControl");
 const sizeValue = document.getElementById("sizeValue");
+const timerDisplay = document.getElementById("timerDisplay");
+const timerToggleBtn = document.getElementById("timerToggle");
+const timerResetBtn = document.getElementById("timerReset");
 
 const palette = document.getElementById("palette");
 const newWordBtn = document.getElementById("newWord");
@@ -78,6 +85,53 @@ function renderWord() {
   const wordDisplay = document.getElementById("wordDisplay");
   wordDisplay.textContent = state.hidden ? "****" : state.word;
   toggleWordBtn.textContent = state.hidden ? "显示词语" : "遮住词语";
+}
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function renderTimer() {
+  timerDisplay.textContent = formatTime(timerRemaining);
+  timerToggleBtn.textContent = timerId ? "暂停" : "开始";
+}
+
+function stopTimer() {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+}
+
+function tickTimer() {
+  timerRemaining = Math.max(timerRemaining - 1, 0);
+  renderTimer();
+  if (timerRemaining === 0) {
+    stopTimer();
+    statusEl.textContent = "时间到，请揭晓答案！";
+  }
+}
+
+function toggleTimer() {
+  if (timerId) {
+    stopTimer();
+    renderTimer();
+    return;
+  }
+
+  if (timerRemaining === 0) {
+    timerRemaining = TIMER_DURATION;
+  }
+  timerId = setInterval(tickTimer, 1000);
+  renderTimer();
+}
+
+function resetTimer() {
+  stopTimer();
+  timerRemaining = TIMER_DURATION;
+  renderTimer();
 }
 
 function buildPalette() {
@@ -214,6 +268,7 @@ function bindEvents() {
   newWordBtn.addEventListener("click", () => {
     state.hidden = false;
     setWord();
+    resetTimer();
   });
 
   toggleWordBtn.addEventListener("click", () => {
@@ -225,6 +280,9 @@ function bindEvents() {
     state.hidden = false;
     renderWord();
   });
+
+  timerToggleBtn.addEventListener("click", toggleTimer);
+  timerResetBtn.addEventListener("click", resetTimer);
 
   document.getElementById("submitGuess").addEventListener("click", submitGuess);
   document.getElementById("guessInput").addEventListener("keydown", (evt) => {
@@ -244,6 +302,7 @@ function init() {
   resizeCanvas();
   setWord();
   renderWord();
+  resetTimer();
 }
 
 document.addEventListener("DOMContentLoaded", init);
